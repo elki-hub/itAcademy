@@ -1,0 +1,6 @@
+<div>
+  <h2>{{expense?.name}} expenses details:</h2>
+  <p>Date: {{expense?.date}}</p>
+  <p>Amount: &euro;{{expense?.amount}}</p>
+  <p *ngIf="expense?.description">Description: {{expense?.description}}</p>
+</div>

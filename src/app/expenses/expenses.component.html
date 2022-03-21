@@ -1,4 +1,4 @@
-<h3>Add expense</h3>
+<h3>Add expenseList</h3>
 
 <form>
   <div class="row">
@@ -26,37 +26,17 @@
 <h3 class="mt-5">Expenses list</h3>
 <table class="table mt-3">
   <tbody>
-    <tr>
-      <td>Groceries</td>
-      <td>2022-03-19</td>
-      <td>&euro;20.05</td>
-    </tr>
-    <tr>
-      <td>Car repair</td>
-      <td>2022-03-15</td>
-      <td>&euro;352.05</td>
-    </tr>
-    <tr>
-      <td>Cinema tickets</td>
-      <td>2022-03-14</td>
-      <td>&euro;12.26</td>
-    </tr>
-    <tr>
-      <td>Pizza order</td>
-      <td>2022-03-10</td>
-      <td>&euro;12.81</td>
-    </tr>
-    <tr>
-      <td>Gas</td>
-      <td>2022-03-02</td>
-      <td>&euro;67.22</td>
+    <tr *ngFor="let expense of expenseList">
+      <td><a routerLink="/expenses/{{expense?.id}}">{{expense?.name}}</a></td>
+      <td>{{expense?.date}}</td>
+      <td>&euro;{{expense?.amount}}</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td></td>
       <td></td>
-      <td>&euro;464.39</td>
+      <td>&euro;{{totalAmount}}</td>
     </tr>
   </tfoot>
 </table>

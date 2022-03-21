@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+.container-fluid > .row {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.sidebar {
+  background: #7a55e0;
+  color: white;
+}
+
+.sidebar .list-group-item {
+  background: inherit;
+  color: white;
+}
+
+.sidebar .list-group-item:hover {
+  opacity: 0.6;
+}

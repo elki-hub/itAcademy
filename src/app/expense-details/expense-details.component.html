@@ -1,6 +1,9 @@
-<div>
-  <h2>{{expense?.name}} expenses details:</h2>
-  <p>Date: {{expense?.date}}</p>
-  <p>Amount: &euro;{{expense?.amount}}</p>
-  <p *ngIf="expense?.description">Description: {{expense?.description}}</p>
+<div *ngIf="expense; else ErrorMessage">
+  <h2>{{ expense.name }} expenses details:</h2>
+  <p>Date: {{ expense.date }}</p>
+  <p>Amount: &euro;{{ expense.amount }}</p>
+  <p *ngIf="expense.description">Description: {{ expense.description }}</p>
 </div>
+<ng-template #ErrorMessage>
+  <h2>No item with this id was found!</h2>
+</ng-template>

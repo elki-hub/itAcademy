@@ -27,9 +27,9 @@
 <table class="table mt-3">
   <tbody>
     <tr *ngFor="let expense of expenseList">
-      <td><a routerLink="/expenses/{{expense?.id}}">{{expense?.name}}</a></td>
-      <td>{{expense?.date}}</td>
-      <td>&euro;{{expense?.amount}}</td>
+      <td><a routerLink="/expenses/{{expense.id}}">{{expense.name}}</a></td>
+      <td>{{expense.date}}</td>
+      <td>&euro;{{expense.amount}}</td>
     </tr>
   </tbody>
   <tfoot>

@@ -1,39 +1,26 @@
 import { Injectable } from '@angular/core';
-import {expensesList} from "../shared/DATA";
-import {Expense} from "../shared/expense";
+import { expensesList } from '../shared/DATA';
+import { Expense } from '../shared/expense';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExpensesService {
   expenseList: Expense[] = this.loadExpenses();
 
-  constructor() { }
+  constructor() {}
 
-  loadExpenses(): Expense[]{
+  loadExpenses(): Expense[] {
     return expensesList;
   }
 
-  getExpenseById(id: string | null): Expense | undefined{
-    for (let expense of this.expenseList){
-      if(expense.id == id){
-        console.log(expense);
-        return expense;
-      }
-    }
-    return undefined;
+  getExpenseById(id: string | null): Expense | undefined {
+    return this.expenseList.find((expense) => expense.id === id);
   }
 
-  countExpensesAmount(): number{
-    let amount = 0;
-    for (let expense of this.expenseList){
-      amount += parseFloat(expense.amount);
-    }
-    return amount;
+  countExpensesAmount(): number {
+    return this.expenseList
+      .map((item) => parseFloat(item.amount))
+      .reduce((prev, next) => prev + next);
   }
-
-  isExpenseInTheList(id: string | null): boolean{
-    return !(this.getExpenseById(id) == undefined);
-  }
-
 }

@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { expensesList } from '../shared/DATA';
 import { Expense } from '../shared/expense';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExpensesService {
-  expenseList: Expense[] = this.loadExpenses();
+  constructor(private httpClient: HttpClient) {}
 
-  constructor() {}
-
-  loadExpenses(): Expense[] {
-    return expensesList;
+  loadExpenses(): Observable<Expense[]> {
+    return this.httpClient.get<Expense[]>('/api/expenses'); //paima objekta is .json files
   }
 
-  getExpenseById(id: string | null): Expense | undefined {
-    return this.expenseList.find((expense) => expense.id === id);
+  getExpenseById(id: string): Observable<Expense> {
+    return this.httpClient.get<Expense>(`/api/expenses/${id}`);
   }
 
-  countExpensesAmount(): number {
-    return this.expenseList
-      .map((item) => parseFloat(item.amount))
-      .reduce((prev, next) => prev + next);
+  addExpense(expense: Expense): Observable<Expense> {
+    return this.httpClient.post<Expense>(`/api/expenses`, expense); //tiesiogiai bendrauja su db
   }
+
+  // countExpensesAmount(): number {
+  //   // return this.loadExpenses().pipe(tap((expenses: Expense[]) => {expenses.map((item: Expense) => parseFloat(item.amount)).reduce((prev, next) => prev + next)}));
+  //
+  //   // return expensesList
+  //     // .map((item) => parseFloat(item.amount)) //gali paimti reiksme ir paimti kita reiksme
+  //     // .reduce((prev, next) => prev + next);
+  // }
 }

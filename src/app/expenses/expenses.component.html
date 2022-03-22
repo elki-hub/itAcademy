@@ -1,42 +1,23 @@
 <h3>Add expenseList</h3>
 
-<form>
-  <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Expense name" />
-    </div>
-    <div class="col">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Date"
-        bsDatepicker
-        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
-      />
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Amount" />
-    </div>
-    <div class="col">
-      <button class="btn btn-primary">Add</button>
-    </div>
-  </div>
-</form>
+<app-expense-form></app-expense-form>
 
 <h3 class="mt-5">Expenses list</h3>
 <table class="table mt-3">
   <tbody>
-    <tr *ngFor="let expense of expenseList">
-      <td><a routerLink="/expenses/{{expense.id}}">{{expense.name}}</a></td>
-      <td>{{expense.date}}</td>
-      <td>&euro;{{expense.amount}}</td>
+    <tr *ngFor="let expense of expensesList$ | async">
+      <td>
+        <a routerLink="/expenses/{{ expense.id }}">{{ expense.name }}</a>
+      </td>
+      <td>{{ expense.date | date }}</td>
+      <td>&euro;{{ expense.amount }}</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td></td>
       <td></td>
-      <td>&euro;{{totalAmount}}</td>
+      <td>&euro;{{ totalAmount }}</td>
     </tr>
   </tfoot>
 </table>

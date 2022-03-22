@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Expense } from '../shared/expense';
 import { ExpensesService } from '../services/expenses.service';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-expense-details',
@@ -9,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./expense-details.component.css'],
 })
 export class ExpenseDetailsComponent implements OnInit {
-  expense: Expense | undefined;
+  expense$: Observable<Expense> = of(); //new subject
+  id: string | null = '';
 
   constructor(
     private expenseService: ExpensesService,
@@ -17,7 +19,9 @@ export class ExpenseDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.expense = this.expenseService.getExpenseById(id);
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.expense$ = this.expenseService.getExpenseById(this.id);
+    }
   }
 }

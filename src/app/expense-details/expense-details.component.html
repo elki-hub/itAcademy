@@ -1,8 +1,8 @@
-<div *ngIf="expense; else ErrorMessage">
-  <h2>{{ expense.name }} expenses details:</h2>
-  <p>Date: {{ expense.date }}</p>
-  <p>Amount: &euro;{{ expense.amount }}</p>
-  <p *ngIf="expense.description">Description: {{ expense.description }}</p>
+<div *ngIf="expense$ | async as value; else ErrorMessage">
+  <h2>{{ value.name }} expenses details:</h2>
+  <p>Date: {{ value.date }}</p>
+  <p>Amount: &euro;{{ value.amount }}</p>
+  <p *ngIf="value.description">Description: {{ value.description }}</p>
 </div>
 <ng-template #ErrorMessage>
   <h2>No item with this id was found!</h2>

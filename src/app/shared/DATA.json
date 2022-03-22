@@ -3,44 +3,99 @@
     {
       "date": "2022-03",
       "budget": "2000.00"
-    }],
+    }
+  ],
   "expenses": [
     {
+      "id": "1",
       "name": "Groceries",
       "date": "2022-03-19",
-      "amount": "20.05"
+      "amount": "20.05",
+      "description": "Maxima - apie viska pagalvota"
     },
     {
+      "id": "2",
       "name": "Car repair",
       "date": "2022-03-15",
       "amount": "352.05"
     },
     {
+      "id": "3",
       "name": "Cinema tickets",
       "date": "2022-03-14",
       "amount": "12.26"
     },
     {
+      "id": "4",
       "name": "Pizza order",
       "date": "2022-03-10",
       "amount": "12.81"
     },
     {
+      "id": "5",
       "name": "Gas",
       "date": "2022-03-02",
+      "amount": "67.22",
+      "description": "Expensive gas"
+    },
+    {
+      "id": "6",
+      "name": "Ice-cream",
+      "date": "2022-03-02",
       "amount": "67.22"
+    },
+    {
+      "name": "house",
+      "date": "2021-12-11T22:00:00.000Z",
+      "amount": "50500",
+      "id": "cGG618m"
+    },
+    {
+      "name": "aswd",
+      "date": "2021-12-11T22:00:00.000Z",
+      "amount": "854",
+      "id": "iVH2I5v"
     }
   ],
   "budgets": [
-    { "name": "Groceries", "spent": "52.12", "limit": "200.00" },
-    { "name": "Shopping", "spent": "92.55", "limit": "300.00" },
-    { "name": "Gas", "spent": "88.55", "limit": "150.00" },
-    { "name": "Entertainment", "spent": "88.55", "limit": "150.00" },
-    { "name": "Dining out", "spent": "88.55", "limit": "100.00" }
+    {
+      "name": "Groceries",
+      "spent": "52.12",
+      "limit": "200.00"
+    },
+    {
+      "name": "Shopping",
+      "spent": "92.55",
+      "limit": "300.00"
+    },
+    {
+      "name": "Gas",
+      "spent": "88.55",
+      "limit": "150.00"
+    },
+    {
+      "name": "Entertainment",
+      "spent": "88.55",
+      "limit": "150.00"
+    },
+    {
+      "name": "Dining out",
+      "spent": "88.55",
+      "limit": "100.00"
+    }
   ],
   "upcomingBills": [
-    { "name": "Electricity", "amount": "40.05" },
-    { "name": "Rent", "amount": "500.00" },
-    { "name": "Internet", "amount": "11.20" }
+    {
+      "name": "Electricity",
+      "amount": "40.05"
+    },
+    {
+      "name": "Rent",
+      "amount": "500.00"
+    },
+    {
+      "name": "Internet",
+      "amount": "11.20"
+    }
   ]
 }

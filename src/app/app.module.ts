@@ -10,6 +10,9 @@ import { BudgetsComponent } from './budgets/budgets.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { HomeComponent } from './home/home.component';
 import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ExpenseFormComponent } from './expenses/expense-form/expense-form.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { ExpenseDetailsComponent } from './expense-details/expense-details.compo
     HomeComponent,
     BudgetsComponent,
     ExpenseDetailsComponent,
+    ExpenseFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,8 @@ import { ExpenseDetailsComponent } from './expense-details/expense-details.compo
     AlertModule.forRoot(),
     BsDatepickerModule,
     ProgressbarModule,
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [], //nurodomi servisai
   bootstrap: [AppComponent],

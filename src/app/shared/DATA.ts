@@ -32,4 +32,10 @@ export const expensesList = [
     amount: '67.22',
     description: 'Expensive gas',
   },
+  {
+    id: '6',
+    name: 'Ice-cream',
+    date: '2022-03-02',
+    amount: '100.99',
+  },
 ];

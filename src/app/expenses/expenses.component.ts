@@ -22,5 +22,16 @@ export class ExpensesComponent implements OnInit {
         });
       })
     );
+    this.loadExpenses();
+  }
+
+  loadExpenses(): void {
+    this.expensesList$ = this.expensesService.loadExpenses().pipe(
+      tap((expenses: Expense[]) => {
+        expenses.map((item: Expense) => {
+          this.totalAmount += parseFloat(item.amount);
+        });
+      })
+    );
   }
 }

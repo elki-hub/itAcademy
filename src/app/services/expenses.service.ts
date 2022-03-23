@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Expense } from '../shared/expense';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,12 @@ export class ExpensesService {
 
   addExpense(expense: Expense): Observable<Expense> {
     return this.httpClient.post<Expense>(`/api/expenses`, expense); //tiesiogiai bendrauja su db
+  }
+
+  validateDescription(description: string): Observable<{ valid: boolean }> {
+    return this.httpClient.post<{ valid: boolean }>(`/out`, {
+      toValidate: description,
+    });
   }
 
   // countExpensesAmount(): number {

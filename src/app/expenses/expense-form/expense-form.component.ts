@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, of, startWith } from 'rxjs';
 import { explicitLanguageValidator } from './validators/explicit-language.validator';
 import { nameDescriptionValidator } from './validators/name-description.validator';
+import { regulatoryValidator } from './validators/regulatory.validator';
 
 @Component({
   selector: 'app-expense-form',
@@ -47,7 +48,9 @@ export class ExpenseFormComponent implements OnInit {
           ],
         }),
         description: new FormControl('', {
+          updateOn: 'blur',
           validators: [Validators.maxLength(20), explicitLanguageValidator],
+          asyncValidators: [regulatoryValidator(this.expensesService)],
         }),
       },
       { validators: [nameDescriptionValidator] }

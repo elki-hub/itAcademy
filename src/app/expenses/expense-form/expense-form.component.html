@@ -78,6 +78,9 @@
           No explicit language allowed -
           {{expenseDescription?.errors?.['explicitLanguage'].word}}
         </div>
+        <div *ngIf="expenseDescription?.errors?.['regulatory']">
+          Regulatory validation fails when writing "zole"
+        </div>
       </div>
     </div>
     <div class="col">

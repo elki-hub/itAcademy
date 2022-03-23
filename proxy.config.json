@@ -5,5 +5,12 @@
     "changeOrigin": true,
     "logLevel": "debug",
     "pathRewrite": {"^/api" : ""}
+  },
+  "/out": {
+    "target": "https://billing.akademija.workers.dev",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/out" : ""}
   }
 }

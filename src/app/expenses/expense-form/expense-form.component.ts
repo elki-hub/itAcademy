@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ExpensesService } from '../../services/expenses.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { map, Observable, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-expense-form',
@@ -10,6 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ExpenseFormComponent implements OnInit {
   @Output() expenseUpdated: EventEmitter<void> = new EventEmitter();
   expenseForm: FormGroup;
+  MaxDescriptionLength: number = 20;
+  remainingLength$: Observable<number> = of(0);
 
   get expenseName() {
     return this.expenseForm.get('name'); //paima expense form is konstructoriaus
@@ -23,6 +26,10 @@ export class ExpenseFormComponent implements OnInit {
     return this.expenseForm.get('amount'); //paima expense form is konstructoriaus
   }
 
+  get expenseDescription() {
+    return this.expenseForm.get('description'); //paima expense form is konstructoriaus
+  }
+
   constructor(private expensesService: ExpensesService) {
     this.expenseForm = new FormGroup({
       name: new FormControl('', {
@@ -30,12 +37,23 @@ export class ExpenseFormComponent implements OnInit {
       }),
       date: new FormControl('', { validators: [Validators.required] }),
       amount: new FormControl('', {
-        validators: [Validators.required, Validators.maxLength(5)],
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.MaxDescriptionLength),
+        ],
+      }),
+      description: new FormControl('', {
+        validators: [Validators.maxLength(20)],
       }),
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.remainingLength$ = this.expenseDescription!.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this.MaxDescriptionLength - value.length)
+    );
+  }
 
   addExpense() {
     const expense = this.expenseForm.getRawValue();
@@ -47,5 +65,6 @@ export class ExpenseFormComponent implements OnInit {
 
   resetExpense() {
     this.expenseForm.reset();
+    this.remainingLength$ = of(0);
   }
 }

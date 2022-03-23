@@ -1,7 +1,9 @@
 <form [formGroup]="expenseForm" (ngSubmit)="addExpense()">
   <div class="row">
     <div class="col">
+      <label for="expenseName">Name</label>
       <input
+        id="expenseName"
         type="text"
         class="form-control"
         placeholder="Expense name"
@@ -17,10 +19,12 @@
       </div>
     </div>
     <div class="col">
+      <label for="expenseDate">Date</label>
       <input
+        id="expenseDate"
         type="text"
         class="form-control"
-        placeholder="Date"
+        placeholder="Expense Date"
         bsDatepicker
         [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
         formControlName="date"
@@ -32,10 +36,12 @@
       </div>
     </div>
     <div class="col">
+      <label for="expenseAmount">Amount</label>
       <input
+        id="expenseAmount"
         type="text"
         class="form-control"
-        placeholder="Amount"
+        placeholder="Expense Amount"
         formControlName="amount"
       />
       <div [hidden]="expenseAmount?.valid || expenseAmount?.pristine">
@@ -44,6 +50,26 @@
         </div>
         <div *ngIf="expenseAmount?.errors?.['maxlength']">
           Please enter no more than 5 numbers
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label for="expenseDescription">
+        {{ remainingLength$ | async }} / {{ MaxDescriptionLength }} remaining
+      </label>
+      <input
+        id="expenseDescription"
+        type="text"
+        class="form-control"
+        placeholder="Expense description"
+        formControlName="description"
+      />
+      <div [hidden]="expenseDescription?.valid || expenseDescription?.pristine">
+        <div *ngIf="expenseDescription?.errors?.['required']">
+          Expense Description is required
+        </div>
+        <div *ngIf="expenseDescription?.errors?.['maxlength']">
+          Maximum of {{ MaxDescriptionLength }} characters
         </div>
       </div>
     </div>

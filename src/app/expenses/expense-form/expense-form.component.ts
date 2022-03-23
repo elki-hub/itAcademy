@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ExpensesService } from '../../services/expenses.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, of, startWith } from 'rxjs';
+import { explicitLanguageValidator } from './validators/explicit-language.validator';
+import { nameDescriptionValidator } from './validators/name-description.validator';
 
 @Component({
   selector: 'app-expense-form',
@@ -31,21 +33,25 @@ export class ExpenseFormComponent implements OnInit {
   }
 
   constructor(private expensesService: ExpensesService) {
-    this.expenseForm = new FormGroup({
-      name: new FormControl('', {
-        validators: [Validators.required, Validators.pattern('[a-zA-Z]*')],
-      }),
-      date: new FormControl('', { validators: [Validators.required] }),
-      amount: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.maxLength(this.MaxDescriptionLength),
-        ],
-      }),
-      description: new FormControl('', {
-        validators: [Validators.maxLength(20)],
-      }),
-    });
+    this.expenseForm = new FormGroup(
+      {
+        name: new FormControl('', {
+          validators: [Validators.required, Validators.pattern('[a-zA-Z]*')],
+        }),
+        date: new FormControl('', { validators: [Validators.required] }),
+        amount: new FormControl('', {
+          validators: [
+            Validators.required,
+            Validators.maxLength(this.MaxDescriptionLength),
+            Validators.pattern('[0-9][0-9.,]*'),
+          ],
+        }),
+        description: new FormControl('', {
+          validators: [Validators.maxLength(20), explicitLanguageValidator],
+        }),
+      },
+      { validators: [nameDescriptionValidator] }
+    );
   }
 
   ngOnInit(): void {

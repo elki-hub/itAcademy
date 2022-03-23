@@ -51,6 +51,9 @@
         <div *ngIf="expenseAmount?.errors?.['maxlength']">
           Please enter no more than 5 numbers
         </div>
+        <div *ngIf="expenseAmount?.errors?.['pattern']">
+          Only numbers allowed
+        </div>
       </div>
     </div>
     <div class="col">
@@ -71,6 +74,10 @@
         <div *ngIf="expenseDescription?.errors?.['maxlength']">
           Maximum of {{ MaxDescriptionLength }} characters
         </div>
+        <div *ngIf="expenseDescription?.errors?.['explicitLanguage']">
+          No explicit language allowed -
+          {{expenseDescription?.errors?.['explicitLanguage'].word}}
+        </div>
       </div>
     </div>
     <div class="col">
@@ -87,6 +94,11 @@
     </div>
     <div class="col">
       <button type="reset" class="btn btn-primary">Reset with btn type</button>
+    </div>
+  </div>
+  <div [hidden]="expenseForm?.valid || expenseForm?.pristine">
+    <div *ngIf="expenseForm?.errors?.['nameDescription']">
+      Description can not contain Expense name!
     </div>
   </div>
 </form>

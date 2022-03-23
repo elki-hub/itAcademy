@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ExpenseModel } from './expense.model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ExpensesService } from '../../services/expenses.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-expense-form',
@@ -8,19 +8,44 @@ import { ExpensesService } from '../../services/expenses.service';
   styleUrls: ['./expense-form.component.css'],
 })
 export class ExpenseFormComponent implements OnInit {
-  expense: ExpenseModel = new ExpenseModel('', '', '');
+  @Output() expenseUpdated: EventEmitter<void> = new EventEmitter();
+  expenseForm: FormGroup;
 
-  constructor(private expensesService: ExpensesService) {}
+  get expenseName() {
+    return this.expenseForm.get('name'); //paima expense form is konstructoriaus
+  }
+
+  get expenseDate() {
+    return this.expenseForm.get('date'); //paima expense form is konstructoriaus
+  }
+
+  get expenseAmount() {
+    return this.expenseForm.get('amount'); //paima expense form is konstructoriaus
+  }
+
+  constructor(private expensesService: ExpensesService) {
+    this.expenseForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('[a-zA-Z]*')],
+      }),
+      date: new FormControl('', { validators: [Validators.required] }),
+      amount: new FormControl('', {
+        validators: [Validators.required, Validators.maxLength(5)],
+      }),
+    });
+  }
 
   ngOnInit(): void {}
 
   addExpense() {
-    this.expensesService
-      .addExpense(this.expense)
-      .subscribe(() => (this.expense = new ExpenseModel('', '', '')));
+    const expense = this.expenseForm.getRawValue();
+    this.expensesService.addExpense(expense).subscribe(() => {
+      this.expenseUpdated.emit();
+      this.resetExpense();
+    });
   }
 
   resetExpense() {
-    this.expense = new ExpenseModel('', '', '');
+    this.expenseForm.reset();
   }
 }

@@ -11,7 +11,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { HomeComponent } from './home/home.component';
 import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ExpenseFormComponent } from './expenses/expense-form/expense-form.component';
 
 @NgModule({
@@ -31,7 +31,7 @@ import { ExpenseFormComponent } from './expenses/expense-form/expense-form.compo
     BsDatepickerModule,
     ProgressbarModule,
     HttpClientModule,
-    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [], //nurodomi servisai
   bootstrap: [AppComponent],

@@ -1,59 +1,48 @@
-<form #expenseForm="ngForm" (ngSubmit)="addExpense()">
+<form [formGroup]="expenseForm" (ngSubmit)="addExpense()">
   <div class="row">
     <div class="col">
       <input
-        name="name"
         type="text"
         class="form-control"
         placeholder="Expense name"
-        required
-        pattern="[a-zA-Z]*"
-        [(ngModel)]="expense.name"
-        #expenseName="ngModel"
+        formControlName="name"
       />
-      <div [hidden]="expenseName.valid || expenseName.pristine">
-        <div *ngIf="expenseName.errors?.['required']">
+      <div [hidden]="expenseName?.valid || expenseName?.pristine">
+        <div *ngIf="expenseName?.errors?.['required']">
           Expense Name is required
         </div>
-        <div *ngIf="expenseName.errors?.['pattern']">
+        <div *ngIf="expenseName?.errors?.['pattern']">
           Only alphabetic characters
         </div>
       </div>
     </div>
     <div class="col">
       <input
-        name="date"
         type="text"
         class="form-control"
         placeholder="Date"
         bsDatepicker
-        required
         [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
-        [(ngModel)]="expense.date"
-        #expenseDate="ngModel"
+        formControlName="date"
       />
-      <div [hidden]="expenseDate.valid || expenseDate.pristine">
-        <div *ngIf="expenseDate.errors?.['required']">
+      <div [hidden]="expenseDate?.valid || expenseDate?.pristine">
+        <div *ngIf="expenseDate?.errors?.['required']">
           Expense Date is required
         </div>
       </div>
     </div>
     <div class="col">
       <input
-        name="amount"
         type="text"
         class="form-control"
         placeholder="Amount"
-        required
-        maxlength="5"
-        [(ngModel)]="expense.amount"
-        #expenseAmount="ngModel"
+        formControlName="amount"
       />
-      <div [hidden]="expenseAmount.valid || expenseAmount.pristine">
-        <div *ngIf="expenseAmount.errors?.['required']">
+      <div [hidden]="expenseAmount?.valid || expenseAmount?.pristine">
+        <div *ngIf="expenseAmount?.errors?.['required']">
           Expense Amount is required
         </div>
-        <div *ngIf="expenseAmount.errors?.['maxlength']">
+        <div *ngIf="expenseAmount?.errors?.['maxlength']">
           Please enter no more than 5 numbers
         </div>
       </div>
@@ -75,5 +64,3 @@
     </div>
   </div>
 </form>
-
-{{ expense | json }}

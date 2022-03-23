@@ -1,4 +1,4 @@
-<form (ngSubmit)="addExpense()">
+<form #expenseForm="ngForm" (ngSubmit)="addExpense()">
   <div class="row">
     <div class="col">
       <input
@@ -6,8 +6,19 @@
         type="text"
         class="form-control"
         placeholder="Expense name"
+        required
+        pattern="[a-zA-Z]*"
         [(ngModel)]="expense.name"
+        #expenseName="ngModel"
       />
+      <div [hidden]="expenseName.valid || expenseName.pristine">
+        <div *ngIf="expenseName.errors?.['required']">
+          Expense Name is required
+        </div>
+        <div *ngIf="expenseName.errors?.['pattern']">
+          Only alphabetic characters
+        </div>
+      </div>
     </div>
     <div class="col">
       <input
@@ -16,9 +27,16 @@
         class="form-control"
         placeholder="Date"
         bsDatepicker
+        required
         [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
         [(ngModel)]="expense.date"
+        #expenseDate="ngModel"
       />
+      <div [hidden]="expenseDate.valid || expenseDate.pristine">
+        <div *ngIf="expenseDate.errors?.['required']">
+          Expense Date is required
+        </div>
+      </div>
     </div>
     <div class="col">
       <input
@@ -26,11 +44,28 @@
         type="text"
         class="form-control"
         placeholder="Amount"
+        required
+        maxlength="5"
         [(ngModel)]="expense.amount"
+        #expenseAmount="ngModel"
       />
+      <div [hidden]="expenseAmount.valid || expenseAmount.pristine">
+        <div *ngIf="expenseAmount.errors?.['required']">
+          Expense Amount is required
+        </div>
+        <div *ngIf="expenseAmount.errors?.['maxlength']">
+          Please enter no more than 5 numbers
+        </div>
+      </div>
     </div>
     <div class="col">
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!expenseForm.valid"
+      >
+        Add
+      </button>
       <button (click)="resetExpense()" class="btn btn-primary">
         Reset with event
       </button>

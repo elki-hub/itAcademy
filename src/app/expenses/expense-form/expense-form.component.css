@@ -1,0 +1,4 @@
+/*selectink visas klases iskyrus formos elemento*/
+.ng-invalid:not(form){
+  border-left: 5px solid red;
+}
